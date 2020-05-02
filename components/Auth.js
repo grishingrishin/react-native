@@ -8,8 +8,7 @@ const Wrapper = styled.View`
 
 const Container = styled.ImageBackground`
   flex: 1;
-  padding-top: 32px;
-  padding-bottom: 32px;
+  padding: 32px 0;
   justify-content: space-between;
   resize-mode: cover;
 `;
@@ -22,19 +21,17 @@ const Header = styled.View`
 const Title = styled.Text`
   text-align: center;
   font-size: 42px;
+  font-family: Roboto-Thin;
   color: #fff;
 `;
 
 const WrapperInput = styled.View`
-  padding-right: 16px;
-  padding-left: 16px;
+  padding: 0 16px;
 `;
 
 const TextInput = styled.TextInput`
-  padding-top: 16px;
-  padding-right: 14px;
-  padding-bottom: 16px;
-  padding-left: 14px;
+  padding: 16px 14px;
+  font-family: Roboto-Light;
   border-bottom-width: 1px;
   border-bottom-color: #d3c8e6;
 `;
@@ -45,8 +42,7 @@ const Forgot = styled.TouchableOpacity`
 
 const ForgotText = styled.Text`
   text-transform: uppercase;
-  padding-top: 14px;
-  padding-bottom: 14px;
+  padding: 14px 0;
   font-size: 12px;
   color: #fff;
 `;
@@ -63,6 +59,7 @@ const SubmitText = styled.Text`
   text-transform: uppercase;
   font-size: 18px;
   line-height: 54px;
+  font-family: Roboto-Regular;
   color: #fff;
 `;
 
@@ -74,24 +71,24 @@ class Auth extends Component {
       data: {
         login: '',
         password: ''
-      }
+      },
     };
   }
 
-  changeLoginHandler = text => {
+  changeLoginHandler = login => {
     return this.setState({
       data: {
         ...this.state.data,
-        login: text
+        login
       }
     });
   }
 
-  changePasswordHandler = text => {
+  changePasswordHandler = password => {
     return this.setState({
       data: {
         ...this.state.data,
-        password: text
+        password
       }
     });
   }
@@ -103,7 +100,7 @@ class Auth extends Component {
   render() {
     return (
       <Wrapper>
-        <Container source={require('../assets/images/auth-bg.jpg')}>
+        <Container source={require('../assets/auth-bg.jpg')}>
           <Header>
             <Title accessibilityRole='header'>Welcome!</Title>
           </Header>
