@@ -25,7 +25,7 @@ class FloatingLabelInput extends Component {
     super(props);
 
     this.state = {
-      animatedIsFocused: new Animated.Value(props.value.length > 0 && props.value !== '' ? 1 : 0),
+      animatedIsFocused: new Animated.Value(this.hasInputValue()),
     };
   }
 
@@ -38,10 +38,12 @@ class FloatingLabelInput extends Component {
 
   handleBlur = () => {
     return Animated.timing(this.state.animatedIsFocused, {
-      toValue: this.props.value.length > 0 && this.props.value !== '' ? 1 : 0,
+      toValue: this.hasInputValue(),
       duration: 200
     }).start();
   }
+
+  hasInputValue = () => this.props.value.length > 0 && this.props.value !== 0 ? 1 : 0;
 
   render() {
     return (
