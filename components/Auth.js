@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import FloatingLabelInput from './FloatingLabelInput';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -25,15 +26,12 @@ const Title = styled.Text`
   color: #fff;
 `;
 
-const WrapperInput = styled.View`
+const Box = styled.View`
   padding: 0 16px;
 `;
 
-const TextInput = styled.TextInput`
-  padding: 16px 14px;
-  font-family: Roboto-Light;
-  border-bottom-width: 1px;
-  border-bottom-color: #d3c8e6;
+const Group = styled.View`
+  margin-bottom: 14px;
 `;
 
 const Forgot = styled.TouchableOpacity`
@@ -43,11 +41,11 @@ const Forgot = styled.TouchableOpacity`
 const ForgotText = styled.Text`
   text-transform: uppercase;
   padding: 14px 0;
-  font-size: 12px;
+  font-size: 10px;
   color: #fff;
 `;
 
-const Action = styled.View``;
+const Actions = styled.View``;
 
 const Submit = styled.TouchableOpacity`
   align-items: center;
@@ -63,6 +61,18 @@ const SubmitText = styled.Text`
   color: #fff;
 `;
 
+const Question = styled.Text`
+  margin-top: 18px;
+  text-align: center;
+  font-size: 12px;
+  font-family: Roboto-Thin;
+  color: #fff;
+`;
+
+const QuestionRoute = styled.Text`
+  text-decoration: underline;
+  font-family: Roboto-Regular;
+`;
 class Auth extends Component {
   constructor() {
     super();
@@ -102,29 +112,34 @@ class Auth extends Component {
       <Wrapper>
         <Container source={require('../assets/auth-bg.jpg')}>
           <Header>
-            <Title accessibilityRole='header'>Welcome!</Title>
+            <Title>Welcome!</Title>
           </Header>
-          <WrapperInput>
-            <TextInput
-              onChangeText={text => this.changeLoginHandler(text)}
-              value={this.state.data.login}
-              placeholder='Login'
-            />
-            <TextInput 
-              onChangeText={text => this.changePasswordHandler(text)}
-              value={this.state.data.password}
-              secureTextEntry={true}
-              placeholder='Password'
-            />
-            <Forgot onPress={this.goToForgotPassword}>
-              <ForgotText>Forgot Password?</ForgotText>
-            </Forgot>
-          </WrapperInput>
-          <Action>
+          <Box>
+            <Group>
+              <FloatingLabelInput
+                value={this.state.data.login}
+                placeholder='Login'
+                changeHandle={this.changeLoginHandler}
+              />
+            </Group>
+            <Group>
+              <FloatingLabelInput
+                value={this.state.data.password}
+                placeholder='Password'
+                secureTextEntry={true}
+                changeHandle={this.changePasswordHandler}
+              />
+              <Forgot onPress={this.goToForgotPassword}>
+                <ForgotText>Forgot Password?</ForgotText>
+              </Forgot>
+            </Group>
+          </Box>
+          <Actions>
             <Submit activeOpacity={0.9} onPress={this.loginHandler}>
               <SubmitText>Login</SubmitText>
             </Submit>
-          </Action>
+            <Question>Still don’t have an account? <QuestionRoute>Register now!</QuestionRoute></Question>
+          </Actions>
         </Container>
       </Wrapper>
     );

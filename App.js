@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import * as Font from 'expo-font';
+import { ActivityIndicator } from 'react-native';
 import Register from './components/Register';
+
+const LoaderContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+`;
 
 const Container = styled.View`
   flex: 1;
-  justifyContent: center;
 `;
 
 class App extends Component {
@@ -28,7 +33,9 @@ class App extends Component {
   render() {
     if (!this.state.isLoaded) {
       return (
-        <Container></Container>
+        <LoaderContainer>
+          <ActivityIndicator size='large' color='#eb2054' />
+        </LoaderContainer>
       )
     } else {
       return (

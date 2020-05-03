@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import FloatingLabelInput from './FloatingLabelInput';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -31,18 +32,15 @@ const Step = styled.Text`
 
 const Count = styled.Text``;
 
-const WrapperInput = styled.View`
+const Box = styled.View`
   padding: 0 16px;
 `;
 
-const TextInput = styled.TextInput`
-  padding: 16px 14px;
-  font-family: Roboto-Light;
-  border-bottom-width: 1px;
-  border-bottom-color: #d3c8e6;
+const Group = styled.View`
+  margin-bottom: 14px;
 `;
 
-const Action = styled.View``;
+const Actions = styled.View``;
 
 const Submit = styled.TouchableOpacity`
   align-items: center;
@@ -56,6 +54,19 @@ const SubmitText = styled.Text`
   line-height: 54px;
   font-family: Roboto-Regular;
   color: #fff;
+`;
+
+const Question = styled.Text`
+  margin-top: 18px;
+  text-align: center;
+  font-size: 12px;
+  font-family: Roboto-Thin;
+  color: #fff;
+`;
+
+const QuestionRoute = styled.Text`
+  text-decoration: underline;
+  font-family: Roboto-Regular;
 `;
 
 class Register extends Component {
@@ -74,36 +85,36 @@ class Register extends Component {
 
   changeFirstNameHandler = firstName => {
     return this.setState({
-      date: {
+      data: {
         ...this.state.data,
-        firstName
+        firstName,
       }
     });
   }
 
   changeSecondNameHandler = secondName => {
     return this.setState({
-      date: {
+      data: {
         ...this.state.data,
-        secondName
+        secondName,
       }
     });
   }
 
   changeGenderHandler = gender => {
     return this.setState({
-      date: {
+      data: {
         ...this.state.data,
-        gender
+        gender,
       }
     });
   }
 
   changeDateHandler = date => {
     return this.setState({
-      date: {
+      data: {
         ...this.state.data,
-        date
+        date,
       }
     });
   }
@@ -115,33 +126,46 @@ class Register extends Component {
       <Wrapper>
         <Container source={require('../assets/auth-bg.jpg')}>
           <Header>
-            <Title accessibilityRole='header'>
+            <Title>
               Register <Step>Step<Count> 2</Count></Step>
             </Title>
           </Header>
-          <WrapperInput>
-            <TextInput
-              onChangeText={text => this.changeFirstNameHandler(text)}
-              placeholder='First Name'
-            />
-            <TextInput
-              onChangeText={text => this.changeSecondNameHandler(text)}
-              placeholder='Second Name'
-            />
-            <TextInput
-              onChangeText={text => this.changeGenderHandler(text)}
-              placeholder='Gender'
-            />
-            <TextInput
-              onChangeText={text => this.changeDateHandler(text)}
-              placeholder='Date of Birth'
-            />
-          </WrapperInput>
-          <Action>
+          <Box>
+            <Group>
+              <FloatingLabelInput
+                value={this.state.data.firstName}
+                placeholder='First Name'
+                changeHandle={this.changeFirstNameHandler}
+              />
+            </Group>
+            <Group>
+              <FloatingLabelInput
+                value={this.state.data.secondName}
+                placeholder='Second Name'
+                changeHandle={this.changeSecondNameHandler}
+              />
+            </Group>
+            <Group>
+              <FloatingLabelInput
+                value={this.state.data.gender}
+                placeholder='Gender'
+                changeHandle={this.changeGenderHandler}
+              />
+            </Group>
+            <Group>
+              <FloatingLabelInput
+                value={this.state.data.date}
+                placeholder='Date of Birth'
+                changeHandle={this.changeDateHandler}
+              />
+            </Group>
+          </Box>
+          <Actions>
             <Submit activeOpacity={0.9} onPress={this.toNextStep}>
               <SubmitText>Next</SubmitText>
             </Submit>
-          </Action>
+            <Question>Have an account? <QuestionRoute>Sign in!</QuestionRoute></Question>
+          </Actions>
         </Container>
       </Wrapper>
     );
