@@ -43,7 +43,7 @@ class FloatingLabelInput extends Component {
     }).start();
   }
 
-  hasInputValue = () => this.props.value.length > 0 && this.props.value !== 0 ? 1 : 0;
+  hasInputValue = () => typeof this.props.value === String && this.props.value.length !== 0 ? 1 : 0;
 
   render() {
     return (
