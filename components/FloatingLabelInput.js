@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Animated } from 'react-native';
 import styled from 'styled-components';
 
@@ -43,7 +44,7 @@ class FloatingLabelInput extends Component {
     }).start();
   }
 
-  hasInputValue = () => typeof this.props.value === String && this.props.value.length !== 0 ? 1 : 0;
+  hasInputValue = () => this.props.value.length !== 0 ? 1 : 0;
 
   render() {
     return (
@@ -70,7 +71,7 @@ class FloatingLabelInput extends Component {
         </Animated.Text>
         <TextInput
           value={this.props.value}
-          secureTextEntry={this.props.secureTextEntry ? this.props.secureTextEntry : false}
+          secureTextEntry={this.props.secureTextEntry}
           onChangeText={text => this.props.changeHandle(text)}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
@@ -78,6 +79,16 @@ class FloatingLabelInput extends Component {
       </Container>
     )
   }
+}
+
+FloatingLabelInput.propTypes = {
+  value: PropTypes.string.isRequired,
+  secureTextEntry: PropTypes.bool.isRequired,
+  onChangeText: PropTypes.func.isRequired,
+}
+
+FloatingLabelInput.defaultProps = {
+  secureTextEntry: false,
 }
 
 export default FloatingLabelInput;
