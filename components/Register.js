@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
+import { TouchableWithoutFeedback, Animated } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+import Constants from 'expo-constants';
+import * as Permissions from 'expo-permissions';
 import styled from 'styled-components';
+import FadeInLoader from './FadeInLoader';
 import FloatingLabelInput from './FloatingLabelInput';
-
-const Wrapper = styled.View`
-  flex: 1;
-  background-color: #693fa9;
-`;
 
 const Container = styled.ImageBackground`
   flex: 1;
@@ -15,10 +15,11 @@ const Container = styled.ImageBackground`
 `;
 
 const Header = styled.View`
-  padding: 32px 0;
+  position: relative;
+  margin: 32px 14px;
 `;
 
-const Title = styled.Text`
+const MainTitle = styled.Text`
   text-transform: uppercase;
   text-align: center;
   font-size: 32px;
@@ -26,14 +27,31 @@ const Title = styled.Text`
   color: #fff;
 `;
 
-const Step = styled.Text`
-  font-family: Roboto-Regular;
+const Box = styled.View`
+  padding: 0 14px;
 `;
 
-const Count = styled.Text``;
+const AvatarWrap = styled.View`
+  margin-bottom: 32px;
+  align-items: center;
+`;
 
-const Box = styled.View`
-  padding: 0 16px;
+const Ava = styled.Image`
+  width: 180px;
+  height: 180px;
+  border-radius: 120px;
+`;
+
+const Upload = styled.Image`
+  width: 150px;
+  height: 150px;
+`;
+
+const UploadText = styled.Text`
+  margin-top: 14px;
+  font-size: 28px;
+  font-family: Roboto-Light;
+  color: #fff;
 `;
 
 const Group = styled.View`
@@ -74,100 +92,100 @@ class Register extends Component {
     super();
 
     this.state = {
-      data: {
-        firstName: '',
-        secondName: '',
-        gender: '',
-        date: '' 
-      },
+      username: '',
+      email: '',
+      password: '',
+      passwordCheck: '',
+      image: null,
     };
   }
 
-  changeFirstNameHandler = firstName => {
+  changeTextHandler = props => value => {
     return this.setState({
-      data: {
-        ...this.state.data,
-        firstName,
-      }
+      [props]: value,
     });
   }
 
-  changeSecondNameHandler = secondName => {
-    return this.setState({
-      data: {
-        ...this.state.data,
-        secondName,
+  getPermissionAsync = async () => {
+    if (Constants.platform.ios) {
+      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+      if (status !== 'granted') {
+        alert('Sorry, we need camera roll permissions to make this work!');
       }
-    });
+    }
   }
 
-  changeGenderHandler = gender => {
-    return this.setState({
-      data: {
-        ...this.state.data,
-        gender,
+  pickImage = async () => {
+    try {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+      if (!result.cancelled) {
+        
+        this.setState({ image: result.uri });
       }
-    });
+
+      return result;
+    } catch (e) {
+      console.log(e);
+    }
   }
 
-  changeDateHandler = date => {
-    return this.setState({
-      data: {
-        ...this.state.data,
-        date,
-      }
-    });
+  componentDidMount() {
+    return this.getPermissionAsync();
   }
-
-  toNextStep = () => {}
 
   render() {
+    const { image } = this.state;
+
     return (
-      <Wrapper>
-        <Container source={require('../assets/auth-bg.jpg')}>
-          <Header>
-            <Title>
-              Register <Step>Step<Count> 2</Count></Step>
-            </Title>
-          </Header>
+      <Container source={require('../assets/auth-bg.jpg')}>
+        <Header>
+          <MainTitle>
+            Create your account
+          </MainTitle>
+        </Header>
+        <FadeInLoader>
           <Box>
+            <AvatarWrap>
+              <TouchableWithoutFeedback onPress={this.pickImage}>
+                { image ? <Ava source={{ uri: image }} /> : <Upload source={require('../assets/upload.png')} /> }
+              </TouchableWithoutFeedback>
+              <UploadText>Upload your photo</UploadText>
+            </AvatarWrap>
             <Group>
               <FloatingLabelInput
-                value={this.state.data.firstName}
-                placeholder='First Name'
-                changeHandle={this.changeFirstNameHandler}
+                value={this.state.name}
+                placeholder='Username'
+                changeHandle={this.changeTextHandler('username')}
               />
             </Group>
             <Group>
               <FloatingLabelInput
-                value={this.state.data.secondName}
-                placeholder='Second Name'
-                changeHandle={this.changeSecondNameHandler}
+                value={this.state.email}
+                placeholder='Email address'
+                changeHandle={this.changeTextHandler('email')}
               />
             </Group>
             <Group>
               <FloatingLabelInput
-                value={this.state.data.gender}
-                placeholder='Gender'
-                changeHandle={this.changeGenderHandler}
-              />
-            </Group>
-            <Group>
-              <FloatingLabelInput
-                value={this.state.data.date}
-                placeholder='Date of Birth'
-                changeHandle={this.changeDateHandler}
+                value={this.state.password}
+                placeholder='Password'
+                changeHandle={this.changeTextHandler('password')}
               />
             </Group>
           </Box>
-          <Actions>
-            <Submit activeOpacity={0.9} onPress={this.toNextStep}>
-              <SubmitText>Next</SubmitText>
-            </Submit>
-            <Question>Have an account? <QuestionRoute>Sign in!</QuestionRoute></Question>
-          </Actions>
-        </Container>
-      </Wrapper>
+        </FadeInLoader>
+        <Actions>
+          <Submit activeOpacity={0.9}>
+            <SubmitText>Sign up</SubmitText>
+          </Submit> 
+          <Question>Have an account? <QuestionRoute>Sign in!</QuestionRoute></Question>
+        </Actions>
+      </Container>
     );
   }
 }

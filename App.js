@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import * as Font from 'expo-font';
 import { ActivityIndicator } from 'react-native';
+import ErrorBoundary from './components/ErrorBoundary';
 import Register from './components/Register';
 
 const LoaderContainer = styled.View`
@@ -39,9 +40,11 @@ class App extends Component {
       )
     } else {
       return (
-        <Container>
-          <Register />
-        </Container>
+        <ErrorBoundary>
+          <Container>
+            <Register />
+          </Container>
+        </ErrorBoundary>
       )
     }
   }

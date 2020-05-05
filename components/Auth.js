@@ -78,28 +78,14 @@ class Auth extends Component {
     super();
 
     this.state = {
-      data: {
-        login: '',
-        password: ''
-      },
-    };
+      login: '',
+      password: ''
+    }
   }
 
-  changeLoginHandler = login => {
+  changeTextHandler = props => value => {
     return this.setState({
-      data: {
-        ...this.state.data,
-        login
-      }
-    });
-  }
-
-  changePasswordHandler = password => {
-    return this.setState({
-      data: {
-        ...this.state.data,
-        password
-      }
+      [props]: value,
     });
   }
 
@@ -117,17 +103,17 @@ class Auth extends Component {
           <Box>
             <Group>
               <FloatingLabelInput
-                value={this.state.data.login}
+                value={this.state.login}
                 placeholder='Login'
-                changeHandle={this.changeLoginHandler}
+                changeHandle={this.changeTextHandler('login')}
               />
             </Group>
             <Group>
               <FloatingLabelInput
-                value={this.state.data.password}
+                value={this.state.password}
                 placeholder='Password'
                 secureTextEntry={true}
-                changeHandle={this.changePasswordHandler}
+                changeHandle={this.changeTextHandler('password')}
               />
               <Forgot onPress={this.goToForgotPassword}>
                 <ForgotText>Forgot Password?</ForgotText>

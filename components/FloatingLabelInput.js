@@ -14,7 +14,7 @@ const Placeholder = styled.Text`
 
 const TextInput = styled.TextInput`
   padding: 18px 14px 18px 14px;
-  font-size: 22px;
+  font-size: 16px;
   font-family: Roboto-Light;
   color: #fff;
   border-bottom-width: 1px;
@@ -84,10 +84,11 @@ class FloatingLabelInput extends Component {
 FloatingLabelInput.propTypes = {
   value: PropTypes.string.isRequired,
   secureTextEntry: PropTypes.bool.isRequired,
-  onChangeText: PropTypes.func.isRequired,
+  changeHandle: PropTypes.func.isRequired,
 }
 
 FloatingLabelInput.defaultProps = {
+  value: '',
   secureTextEntry: false,
 }
 
