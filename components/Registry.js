@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { TouchableWithoutFeedback, Animated } from 'react-native';
+import { Link } from 'react-router-native';
+import { TouchableWithoutFeedback } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import Constants from 'expo-constants';
-import * as Permissions from 'expo-permissions';
 import styled from 'styled-components';
 import FadeInLoader from './FadeInLoader';
 import FloatingLabelInput from './FloatingLabelInput';
@@ -19,7 +18,7 @@ const Header = styled.View`
   margin: 32px 14px;
 `;
 
-const MainTitle = styled.Text`
+const Title = styled.Text`
   text-transform: uppercase;
   text-align: center;
   font-size: 32px;
@@ -31,7 +30,7 @@ const Box = styled.View`
   padding: 0 14px;
 `;
 
-const AvatarWrap = styled.View`
+const Figure = styled.View`
   margin-bottom: 32px;
   align-items: center;
 `;
@@ -47,7 +46,7 @@ const Upload = styled.Image`
   height: 150px;
 `;
 
-const UploadText = styled.Text`
+const Figcaption = styled.Text`
   margin-top: 14px;
   font-size: 28px;
   font-family: Roboto-Light;
@@ -106,15 +105,6 @@ class Register extends Component {
     });
   }
 
-  getPermissionAsync = async () => {
-    if (Constants.platform.ios) {
-      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-      if (status !== 'granted') {
-        alert('Sorry, we need camera roll permissions to make this work!');
-      }
-    }
-  }
-
   pickImage = async () => {
     try {
       let result = await ImagePicker.launchImageLibraryAsync({
@@ -123,8 +113,8 @@ class Register extends Component {
         aspect: [4, 3],
         quality: 1,
       });
+
       if (!result.cancelled) {
-        
         this.setState({ image: result.uri });
       }
 
@@ -134,28 +124,24 @@ class Register extends Component {
     }
   }
 
-  componentDidMount() {
-    return this.getPermissionAsync();
-  }
-
   render() {
     const { image } = this.state;
 
     return (
       <Container source={require('../assets/auth-bg.jpg')}>
         <Header>
-          <MainTitle>
+          <Title>
             Create your account
-          </MainTitle>
+          </Title>
         </Header>
         <FadeInLoader>
           <Box>
-            <AvatarWrap>
+            <Figure>
               <TouchableWithoutFeedback onPress={this.pickImage}>
                 { image ? <Ava source={{ uri: image }} /> : <Upload source={require('../assets/upload.png')} /> }
               </TouchableWithoutFeedback>
-              <UploadText>Upload your photo</UploadText>
-            </AvatarWrap>
+              <Figcaption>Upload your photo</Figcaption>
+            </Figure>
             <Group>
               <FloatingLabelInput
                 value={this.state.name}
@@ -182,8 +168,8 @@ class Register extends Component {
         <Actions>
           <Submit activeOpacity={0.9}>
             <SubmitText>Sign up</SubmitText>
-          </Submit> 
-          <Question>Have an account? <QuestionRoute>Sign in!</QuestionRoute></Question>
+          </Submit>
+          <Question>Have an account? <Link to="/" component={QuestionRoute}>Sign in!</Link></Question>
         </Actions>
       </Container>
     );

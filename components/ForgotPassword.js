@@ -31,17 +31,6 @@ const Group = styled.View`
   margin-bottom: 14px;
 `;
 
-const Forgot = styled.TouchableOpacity`
-  align-items: flex-end;
-`;
-
-const ForgotText = styled.Text`
-  text-transform: uppercase;
-  padding: 14px 0;
-  font-size: 10px;
-  color: #fff;
-`;
-
 const Actions = styled.View``;
 
 const Submit = styled.TouchableOpacity`
@@ -70,19 +59,18 @@ const QuestionRoute = styled.Text`
   text-decoration: underline;
   font-family: Roboto-Regular;
 `;
-class Auth extends Component {
+class ForgotPassword extends Component {
   constructor() {
     super();
 
     this.state = {
-      login: '',
-      password: ''
+      email: ''
     }
   }
 
-  changeTextHandler = props => value => {
+  changeTextHandler = value => {
     return this.setState({
-      [props]: value,
+      email: value,
     });
   }
 
@@ -90,39 +78,29 @@ class Auth extends Component {
     return (
       <Container source={require('../assets/auth-bg.jpg')}>
         <Header>
-          <Title>Welcome!</Title>
+          <Title>Reset your password!</Title>
         </Header>
         <FadeInLoader>
           <Box>
             <Group>
               <FloatingLabelInput
-                value={this.state.login}
-                placeholder='Login'
-                changeHandle={this.changeTextHandler('login')}
-              />
-            </Group>
-            <Group>
-              <FloatingLabelInput
-                value={this.state.password}
-                placeholder='Password'
+                value={this.state.email}
                 secureTextEntry={true}
-                changeHandle={this.changeTextHandler('password')}
+                placeholder='Enter your email address'
+                changeHandle={this.changeTextHandler}
               />
-              <Forgot onPress={this.goToForgotPassword}>
-                <Link to="/forgot" component={ForgotText}>Forgot Password?</Link>
-              </Forgot>
             </Group>
           </Box>
         </FadeInLoader>
         <Actions>
           <Submit activeOpacity={0.9} onPress={this.loginHandler}>
-            <SubmitText>Sing in</SubmitText>
+            <SubmitText>Send</SubmitText>
           </Submit>
-          <Question>Still don’t have an account? <Link to="/registry" component={QuestionRoute}>Register now!</Link></Question>
+          <Question>Have an account? <Link to="/" component={QuestionRoute}>Sign in!</Link></Question>
         </Actions>
       </Container>
     );
   }
 }
 
-export default Auth;
+export default ForgotPassword;
