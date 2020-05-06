@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import { NativeRouter, Switch, Route } from 'react-router-native';
 import styled from 'styled-components';
 import * as Font from 'expo-font';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 import { ActivityIndicator } from 'react-native';
 import ErrorBoundary from './components/ErrorBoundary';
-import Auth from './components/Auth';
-import Registry from './components/Registry';
-import ForgotPassword from './components/ForgotPassword';
+import Routes from './components/Routes';
 
 const LoaderContainer = styled.View`
   flex: 1;
@@ -57,15 +54,9 @@ class App extends Component {
     } else {
       return (
         <ErrorBoundary>
-          <NativeRouter>
-            <Container>
-              <Switch>
-                <Route exact path='/' component={Auth} />
-                <Route path='/registry' component={Registry} />
-                <Route path='/forgot' component={ForgotPassword} />
-              </Switch>
-            </Container>
-          </NativeRouter>
+          <Container>
+            <Routes />
+          </Container>
         </ErrorBoundary>
       )
     }

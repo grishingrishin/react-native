@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { TouchableOpacity } from 'react-native';
 import { Link } from 'react-router-native';
 import styled from 'styled-components';
 import FadeInLoader from './FadeInLoader';
 import FloatingLabelInput from './FloatingLabelInput';
+import Question from './Question';
 
 const Container = styled.ImageBackground`
   flex: 1;
@@ -31,7 +33,7 @@ const Group = styled.View`
   margin-bottom: 14px;
 `;
 
-const Forgot = styled.TouchableOpacity`
+const Forgot = styled.View`
   align-items: flex-end;
 `;
 
@@ -58,18 +60,6 @@ const SubmitText = styled.Text`
   color: #fff;
 `;
 
-const Question = styled.Text`
-  margin-top: 18px;
-  text-align: center;
-  font-size: 12px;
-  font-family: Roboto-Thin;
-  color: #fff;
-`;
-
-const QuestionRoute = styled.Text`
-  text-decoration: underline;
-  font-family: Roboto-Regular;
-`;
 class Auth extends Component {
   constructor() {
     super();
@@ -108,8 +98,8 @@ class Auth extends Component {
                 secureTextEntry={true}
                 changeHandle={this.changeTextHandler('password')}
               />
-              <Forgot onPress={this.goToForgotPassword}>
-                <Link to="/forgot" component={ForgotText}>Forgot Password?</Link>
+              <Forgot>
+                <Link to="/forgot" component={TouchableOpacity}><ForgotText>Forgot Password?</ForgotText></Link>
               </Forgot>
             </Group>
           </Box>
@@ -118,7 +108,11 @@ class Auth extends Component {
           <Submit activeOpacity={0.9} onPress={this.loginHandler}>
             <SubmitText>Sing in</SubmitText>
           </Submit>
-          <Question>Still don’t have an account? <Link to="/registry" component={QuestionRoute}>Register now!</Link></Question>
+          <Question 
+            path='/registry'
+            route='Register now!'
+            question='Still don’t have an account?'
+          />
         </Actions>
       </Container>
     );

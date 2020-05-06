@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-native';
 import { TouchableWithoutFeedback } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import styled from 'styled-components';
 import FadeInLoader from './FadeInLoader';
 import FloatingLabelInput from './FloatingLabelInput';
+import Question from './Question';
 
 const Container = styled.ImageBackground`
   flex: 1;
@@ -71,19 +71,6 @@ const SubmitText = styled.Text`
   line-height: 54px;
   font-family: Roboto-Regular;
   color: #fff;
-`;
-
-const Question = styled.Text`
-  margin-top: 18px;
-  text-align: center;
-  font-size: 12px;
-  font-family: Roboto-Thin;
-  color: #fff;
-`;
-
-const QuestionRoute = styled.Text`
-  text-decoration: underline;
-  font-family: Roboto-Regular;
 `;
 
 class Register extends Component {
@@ -169,7 +156,11 @@ class Register extends Component {
           <Submit activeOpacity={0.9}>
             <SubmitText>Sign up</SubmitText>
           </Submit>
-          <Question>Have an account? <Link to="/" component={QuestionRoute}>Sign in!</Link></Question>
+          <Question 
+            path='/'
+            route='Sign in!'
+            question='Have an account?'
+          />
         </Actions>
       </Container>
     );

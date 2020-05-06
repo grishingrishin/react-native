@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-native';
 import styled from 'styled-components';
 import FadeInLoader from './FadeInLoader';
 import FloatingLabelInput from './FloatingLabelInput';
+import Question from './Question';
 
 const Container = styled.ImageBackground`
   flex: 1;
@@ -47,18 +47,6 @@ const SubmitText = styled.Text`
   color: #fff;
 `;
 
-const Question = styled.Text`
-  margin-top: 18px;
-  text-align: center;
-  font-size: 12px;
-  font-family: Roboto-Thin;
-  color: #fff;
-`;
-
-const QuestionRoute = styled.Text`
-  text-decoration: underline;
-  font-family: Roboto-Regular;
-`;
 class ForgotPassword extends Component {
   constructor() {
     super();
@@ -96,7 +84,11 @@ class ForgotPassword extends Component {
           <Submit activeOpacity={0.9} onPress={this.loginHandler}>
             <SubmitText>Send</SubmitText>
           </Submit>
-          <Question>Have an account? <Link to="/" component={QuestionRoute}>Sign in!</Link></Question>
+          <Question 
+            path='/'
+            route='Sign in!'
+            question='Have an account?'
+          />
         </Actions>
       </Container>
     );
