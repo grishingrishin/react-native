@@ -25,7 +25,7 @@ class App extends Component {
 
   getPermissionAsync = async () => {
     if (Constants.platform.ios) {
-      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+      const { status } = await Permissions.askAsync(Permissions.CAMERA);
       if (status !== 'granted') {
         alert('Sorry, we need camera roll permissions to make this work!');
       }
@@ -37,6 +37,7 @@ class App extends Component {
   async componentDidMount() {
     await Font.loadAsync({
       'Roboto-Regular': require('./assets/fonts/Roboto-Regular.ttf'),
+      'Roboto-Medium': require('./assets/fonts/Roboto-Medium.ttf'),
       'Roboto-Light': require('./assets/fonts/Roboto-Light.ttf'),
       'Roboto-Thin': require('./assets/fonts/Roboto-Thin.ttf'),
     });

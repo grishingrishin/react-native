@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableWithoutFeedback } from 'react-native';
+import { TouchableWithoutFeedback, Modal } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import styled from 'styled-components';
 import FadeInLoader from './FadeInLoader';
@@ -73,6 +73,35 @@ const SubmitText = styled.Text`
   color: #fff;
 `;
 
+
+const ModalInner = styled.TouchableHighlight`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0,0,0,.5);
+`;
+
+const ModalCard = styled.View`
+  width: 80%;
+  padding: 18px 14px 0 14px;
+  background-color: #fff;
+`;
+
+const ModalTitle = styled.Text`
+  margin-bottom: 12px
+  padding-bottom: 12px;
+  font-size: 18px;
+  line-height: 18px;
+  font-family: Roboto-Medium;
+  border-bottom-width: 1px;
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+`;
+
+const ModalText = styled.Text`
+  margin-bottom: 18px;
+  font-size: 16px;
+`;
+
 class Register extends Component {
   constructor() {
     super();
@@ -83,6 +112,7 @@ class Register extends Component {
       password: '',
       passwordCheck: '',
       image: null,
+      pickImageModal: false,
     };
   }
 
@@ -92,7 +122,15 @@ class Register extends Component {
     });
   }
 
-  pickImage = async () => {
+  pickImage = () => {
+    if (!this.state.pickImageModal) {
+      return this.setState({
+        pickImageModal: true
+      });
+    }
+  }
+
+  loadImageFromDevice = async () => {
     try {
       let result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -102,7 +140,10 @@ class Register extends Component {
       });
 
       if (!result.cancelled) {
-        this.setState({ image: result.uri });
+        this.setState({
+          image: result.uri,
+          pickImageModal: false,
+        });
       }
 
       return result;
@@ -111,11 +152,64 @@ class Register extends Component {
     }
   }
 
+  loadImageFromCamera = async () => {
+    try {
+      let result = await ImagePicker.launchCameraAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+
+      if (!result.cancelled) {
+        this.setState({
+          image: result.uri,
+          pickImageModal: false,
+        });
+      }
+
+      return result;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  removeImage = () => {
+    return this.setState({
+      image: null,
+      pickImageModal: false,
+    });
+  }
+
+  closedPickImageModal = () => {
+    if (this.state.pickImageModal) {
+      return this.setState({
+        pickImageModal: false,
+      });
+    }
+  }
+
   render() {
     const { image } = this.state;
 
     return (
       <Container source={require('../assets/auth-bg.jpg')}>
+        <Modal transparent={true} visible={this.state.pickImageModal}>
+          <ModalInner onPress={this.closedPickImageModal}>
+            <ModalCard>
+              <ModalTitle>Сменить фото профиля</ModalTitle>
+              <TouchableWithoutFeedback onPress={this.loadImageFromDevice}>
+                <ModalText>Загрузить с устройства</ModalText>
+              </TouchableWithoutFeedback>
+              <TouchableWithoutFeedback onPress={this.loadImageFromCamera}>
+                <ModalText>Сделать снимок</ModalText>
+              </TouchableWithoutFeedback>
+              <TouchableWithoutFeedback onPress={this.removeImage}>
+                <ModalText>Удалить фото</ModalText>
+              </TouchableWithoutFeedback>
+            </ModalCard>
+          </ModalInner>
+        </Modal>
         <Header>
           <Title>
             Create your account
