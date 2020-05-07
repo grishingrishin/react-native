@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TouchableWithoutFeedback, Modal } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import FadeInLoader from './FadeInLoader';
 import FloatingLabelInput from './FloatingLabelInput';
 import Question from './Question';

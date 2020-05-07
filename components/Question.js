@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Link } from 'react-router-native';
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 
 const Container = styled.View`
   flex-direction: row;

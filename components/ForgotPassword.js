@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import FadeInLoader from './FadeInLoader';
 import FloatingLabelInput from './FloatingLabelInput';
 import Question from './Question';
@@ -73,7 +73,6 @@ class ForgotPassword extends Component {
             <Group>
               <FloatingLabelInput
                 value={this.state.email}
-                secureTextEntry={true}
                 placeholder='Enter your email address'
                 changeHandle={this.changeTextHandler}
               />
