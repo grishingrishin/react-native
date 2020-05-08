@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FadeInLoader /> renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "opacity": 0,
+    }
+  }
+>
+  <div>
+    Some test node
+  </div>
+</View>
+`;

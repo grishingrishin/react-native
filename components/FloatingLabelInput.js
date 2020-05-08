@@ -83,8 +83,8 @@ class FloatingLabelInput extends Component {
 
 FloatingLabelInput.propTypes = {
   value: PropTypes.string.isRequired,
-  secureTextEntry: PropTypes.bool.isRequired,
   changeHandle: PropTypes.func.isRequired,
+  secureTextEntry: PropTypes.bool.isRequired,
 }
 
 FloatingLabelInput.defaultProps = {
