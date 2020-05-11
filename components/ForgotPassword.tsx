@@ -47,18 +47,22 @@ const SubmitText = styled.Text`
   color: #fff;
 `;
 
-class ForgotPassword extends Component {
-  constructor() {
-    super();
+interface ForgotPasswordState {
+  email: string
+}
+
+class ForgotPassword extends Component<{}, ForgotPasswordState> {
+  constructor(props: object) {
+    super(props);
 
     this.state = {
-      email: ''
+      email: '',
     }
   }
 
-  changeTextHandler = value => {
+  handleEmail = (email: string) => {
     return this.setState({
-      email: value,
+      email,
     });
   }
 
@@ -74,13 +78,13 @@ class ForgotPassword extends Component {
               <FloatingLabelInput
                 value={this.state.email}
                 placeholder='Enter your email address'
-                changeHandle={this.changeTextHandler}
+                changeHandle={this.handleEmail}
               />
             </Group>
           </Box>
         </FadeInLoader>
         <Actions>
-          <Submit activeOpacity={0.9} onPress={this.loginHandler}>
+          <Submit activeOpacity={0.9}>
             <SubmitText>Send</SubmitText>
           </Submit>
           <Question 

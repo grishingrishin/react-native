@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import * as Font from 'expo-font';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, Alert } from 'react-native';
 import ErrorBoundary from './components/ErrorBoundary';
 import Routes from './components/Routes';
 
@@ -16,18 +16,24 @@ const Container = styled.View`
   flex: 1;
 `;
 
-class App extends Component {
-  constructor() {
-    super();
+interface AppState {
+  isLoaded: boolean
+}
 
-    this.state = { isLoaded: false }
+class App extends Component<{}, AppState> {
+  constructor(props: object) {
+    super(props);
+
+    this.state = {
+      isLoaded: false
+    }
   }
 
   getPermissionAsync = async () => {
-    if (Constants.platform.ios) {
+    if (Constants.platform?.ios) {
       const { status } = await Permissions.askAsync(Permissions.CAMERA);
       if (status !== 'granted') {
-        alert('Sorry, we need camera roll permissions to make this work!');
+        Alert.alert('Sorry!', 'We need camera roll permissions to make this work!');
       }
 
       return status;

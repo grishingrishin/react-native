@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<FadeInLoader /> renders correctly 1`] = `
+exports[`<FadeInLoader /> Jest tests renders correctly 1`] = `
 <View
   style={
     Object {
@@ -8,8 +8,8 @@ exports[`<FadeInLoader /> renders correctly 1`] = `
     }
   }
 >
-  <div>
+  <Text>
     Some test node
-  </div>
+  </Text>
 </View>
 `;

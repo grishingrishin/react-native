@@ -23,7 +23,13 @@ const Route = styled.Text`
   color: #fff;
 `;
 
-export default ({ question, path, route }) => (
+export interface QuestionProps {
+  question: string,
+  route: string,
+  path: string,
+}
+
+export default ({ question, route, path }: QuestionProps) => (
   <Container>
     <Question>{question} </Question>
     <Link to={path} component={TouchableOpacity}>

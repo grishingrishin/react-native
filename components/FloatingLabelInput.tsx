@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Animated } from 'react-native';
 import styled from 'styled-components/native';
 
@@ -21,8 +20,24 @@ const TextInput = styled.TextInput`
   border-bottom-color: rgba(211, 200, 230, 0.5);
 `;
 
-class FloatingLabelInput extends Component {
-  constructor(props) {
+interface FloatingLabelInputProps {
+  value: string,
+  placeholder: string,
+  secureTextEntry: boolean,
+  changeHandle(text: string): any
+}
+
+interface FloatingLabelInputState {
+  animatedIsFocused: any
+}
+
+class FloatingLabelInput extends Component<FloatingLabelInputProps, FloatingLabelInputState> {
+  static defaultProps = {
+    value: '',
+    secureTextEntry: false,
+  } 
+
+  constructor(props: FloatingLabelInputProps) {
     super(props);
 
     this.state = {
@@ -30,21 +45,25 @@ class FloatingLabelInput extends Component {
     };
   }
 
+  handleChange = (value: string) => this.props.changeHandle(value);
+
   handleFocus = () => {
     return Animated.timing(this.state.animatedIsFocused, {
       toValue: 1,
-      duration: 200
+      duration: 200,
+      useNativeDriver: false
     }).start();
   }
 
   handleBlur = () => {
     return Animated.timing(this.state.animatedIsFocused, {
       toValue: this.hasInputValue(),
-      duration: 200
+      duration: 200,
+      useNativeDriver: false
     }).start();
   }
 
-  hasInputValue = () => this.props.value.length !== 0 ? 1 : 0;
+  hasInputValue = (): number => this.props.value.length !== 0 ? 1 : 0;
 
   render() {
     return (
@@ -72,24 +91,13 @@ class FloatingLabelInput extends Component {
         <TextInput
           value={this.props.value}
           secureTextEntry={this.props.secureTextEntry}
-          onChangeText={text => this.props.changeHandle(text)}
+          onChangeText={this.handleChange}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
         />
       </Container>
     )
   }
-}
-
-FloatingLabelInput.propTypes = {
-  value: PropTypes.string.isRequired,
-  changeHandle: PropTypes.func.isRequired,
-  secureTextEntry: PropTypes.bool.isRequired,
-}
-
-FloatingLabelInput.defaultProps = {
-  value: '',
-  secureTextEntry: false,
 }
 
 export default FloatingLabelInput;

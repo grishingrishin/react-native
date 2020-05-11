@@ -1,6 +1,7 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { create } from 'react-test-renderer';
 import FadeInLoader from '../components/FadeInLoader';
+import { Text } from 'react-native';
 
 // Disable warning: `useNativeDriver` is not supported because the native animated module is missing. Falling back to JS-based animation. 
 // To resolve this, add `RCTAnimation` module to this app, or remove `useNativeDriver.
@@ -9,12 +10,14 @@ jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
 jest.useFakeTimers();
 
 describe('<FadeInLoader />', () => {
-  it('renders correctly', () => {
-    let tree = renderer.create(
-      <FadeInLoader>
-        <div>Some test node</div>
-      </FadeInLoader>
-    ).toJSON();
-    expect(tree).toMatchSnapshot();
+  describe('Jest tests', () => {
+    it('renders correctly', () => {
+      const tree = create(
+        <FadeInLoader>
+          <Text>Some test node</Text>
+        </FadeInLoader>
+      ).toJSON();
+      expect(tree).toMatchSnapshot();
+    });
   });
 });

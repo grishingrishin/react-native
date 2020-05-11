@@ -73,7 +73,6 @@ const SubmitText = styled.Text`
   color: #fff;
 `;
 
-
 const ModalInner = styled.TouchableHighlight`
   flex: 1;
   justify-content: center;
@@ -102,23 +101,50 @@ const ModalText = styled.Text`
   font-size: 16px;
 `;
 
-class Register extends Component {
-  constructor() {
-    super();
+interface RegisterState {
+  username: string,
+  email: string,
+  password: string,
+  passwordCheck: string,
+  image: string,
+  pickImageModal: boolean,
+}
+
+class Register extends Component<{}, RegisterState> {
+  constructor(props: object) {
+    super(props);
 
     this.state = {
       username: '',
       email: '',
       password: '',
       passwordCheck: '',
-      image: null,
+      image: '',
       pickImageModal: false,
     };
   }
 
-  changeTextHandler = props => value => {
+  handleUser = (username: string) => {
     return this.setState({
-      [props]: value,
+      username, 
+    });
+  }
+
+  handleEmail = (email: string) => {
+    return this.setState({
+      email, 
+    });
+  }
+
+  handlePassword = (password: string) => {
+    return this.setState({
+      password, 
+    });
+  }
+
+  handlePasswordCheck = (passwordCheck: string) => {
+    return this.setState({
+      passwordCheck, 
     });
   }
 
@@ -140,13 +166,13 @@ class Register extends Component {
       });
 
       if (!result.cancelled) {
-        this.setState({
+        return this.setState({
           image: result.uri,
           pickImageModal: false,
         });
       }
 
-      return result;
+      return false;
     } catch (e) {
       console.log(e);
     }
@@ -162,13 +188,13 @@ class Register extends Component {
       });
 
       if (!result.cancelled) {
-        this.setState({
+        return this.setState({
           image: result.uri,
           pickImageModal: false,
         });
       }
 
-      return result;
+      return false;
     } catch (e) {
       console.log(e);
     }
@@ -176,7 +202,7 @@ class Register extends Component {
 
   removeImage = () => {
     return this.setState({
-      image: null,
+      image: '',
       pickImageModal: false,
     });
   }
@@ -225,23 +251,32 @@ class Register extends Component {
             </Figure>
             <Group>
               <FloatingLabelInput
-                value={this.state.name}
+                value={this.state.username}
                 placeholder='Username'
-                changeHandle={this.changeTextHandler('username')}
+                changeHandle={this.handleUser}
               />
             </Group>
             <Group>
               <FloatingLabelInput
                 value={this.state.email}
                 placeholder='Email address'
-                changeHandle={this.changeTextHandler('email')}
+                changeHandle={this.handleEmail}
               />
             </Group>
             <Group>
               <FloatingLabelInput
                 value={this.state.password}
                 placeholder='Password'
-                changeHandle={this.changeTextHandler('password')}
+                secureTextEntry={true}
+                changeHandle={this.handlePassword}
+              />
+            </Group>
+            <Group>
+              <FloatingLabelInput
+                value={this.state.passwordCheck}
+                placeholder='Password check'
+                secureTextEntry={true}
+                changeHandle={this.handlePasswordCheck}
               />
             </Group>
           </Box>

@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Animated } from 'react-native';
 
-class FadeInLoader extends Component {
-  constructor() {
-    super();
+interface FadeInLoaderProps {
+  children: any
+}
+
+interface FadeInLoaderState {
+  opacity: any
+}
+
+class FadeInLoader extends Component<FadeInLoaderProps, FadeInLoaderState> {
+  constructor(props: FadeInLoaderProps) {
+    super(props);
 
     this.state = {
       opacity: new Animated.Value(0),
@@ -26,10 +33,6 @@ class FadeInLoader extends Component {
       </Animated.View>
     )
   }
-}
-
-FadeInLoader.propTypes = {
-  children: PropTypes.node.isRequired
 }
 
 export default FadeInLoader;

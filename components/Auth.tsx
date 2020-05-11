@@ -60,9 +60,14 @@ const SubmitText = styled.Text`
   color: #fff;
 `;
 
-class Auth extends Component {
-  constructor() {
-    super();
+interface AuthState {
+  login: string,
+  password: string,
+}
+
+class Auth extends Component<{}, AuthState> {
+  constructor(props: object) {
+    super(props);
 
     this.state = {
       login: '',
@@ -70,9 +75,15 @@ class Auth extends Component {
     }
   }
 
-  changeTextHandler = props => value => {
+  handleLogin = (login: string) => {
     return this.setState({
-      [props]: value,
+      login,
+    });
+  }
+
+  handlePassword = (password: string) => {
+    return this.setState({
+      password,
     });
   }
 
@@ -88,7 +99,7 @@ class Auth extends Component {
               <FloatingLabelInput
                 value={this.state.login}
                 placeholder='Login'
-                changeHandle={this.changeTextHandler('login')}
+                changeHandle={this.handleLogin}
               />
             </Group>
             <Group>
@@ -96,7 +107,7 @@ class Auth extends Component {
                 value={this.state.password}
                 placeholder='Password'
                 secureTextEntry={true}
-                changeHandle={this.changeTextHandler('password')}
+                changeHandle={this.handlePassword}
               />
               <Forgot>
                 <Link to="/forgot" component={TouchableOpacity}><ForgotText>Forgot Password?</ForgotText></Link>
@@ -105,7 +116,7 @@ class Auth extends Component {
           </Box>
         </FadeInLoader>
         <Actions>
-          <Submit activeOpacity={0.9} onPress={this.loginHandler}>
+          <Submit activeOpacity={0.9}>
             <SubmitText>Sing in</SubmitText>
           </Submit>
           <Question 
