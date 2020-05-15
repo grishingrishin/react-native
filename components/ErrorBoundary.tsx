@@ -9,37 +9,35 @@ const ErrorText = styled.Text`
   color: red;
 `;
 
-interface ErrorBoundaryProps {
-  children: any,
+interface ERProps {
+  childrend: React.ReactNode,
 }
 
-interface ErrorBoundaryState {
-  error: null | object,
+type ERState = {
   hasError: boolean,
-  errorInfo: any,
+  redirect: boolean,
 }
 
-class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
-  constructor(props: ErrorBoundaryProps) {
+class ErrorBoundary extends Component<ERProps, ERState> {
+  constructor(props: ERProps) {
     super(props);
 
-    this.state = {
-      error: null,
-      hasError: false,
-      errorInfo: null,
-    }
+    this.state = { hasError: false, redirect: false, }
   }
 
-  static getDerivedStateFromError(error: object) {
+  public static getDerivedStateFromError() {
     return { hasError: true };
+  }
+
+  public componentDidCatch(error: Error, info: React.ErrorInfo) {
+    console.error("ErrorBoundary caught an error", error, info);
   }
 
   render() {
     if (this.state.hasError) {
       return (
         <ErrorContainer>
-          <ErrorText>{this.state.error && this.state.error.toString()}</ErrorText>
-          <ErrorText>{this.state.errorInfo && this.state.errorInfo.componentStack}</ErrorText>
+          <ErrorText>Oops, Error!</ErrorText>
         </ErrorContainer>
       )
     }
