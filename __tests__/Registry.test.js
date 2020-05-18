@@ -21,15 +21,6 @@ describe('<Registry />', () => {
     it('allows us to loading new avatar', () => {
       const wrapper = shallow(<Registry />);
 
-      let touchableWithoutFeedback = wrapper
-        .find('TouchableWithoutFeedback')
-        .last();
-
-      // open modal menu
-      expect(wrapper.state().pickImageModal).toEqual(false);
-      touchableWithoutFeedback.props().onPress(true);
-      expect(wrapper.state().pickImageModal).toEqual(true);
-
       wrapper.setState({image: '/images/'});
       expect(wrapper.state().image).toEqual('/images/');
 

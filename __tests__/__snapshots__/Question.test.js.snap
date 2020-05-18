@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Question /> Jest tests renders correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "marginTop": 18,
+        "textAlign": "center",
+      },
+    ]
+  }
+>
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#fff",
+          "fontFamily": "Roboto-Thin",
+          "fontSize": 12,
+        },
+      ]
+    }
+  >
+    Some test text question
+     
+  </Text>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#fff",
+            "fontFamily": "Roboto-Regular",
+            "fontSize": 12,
+            "textDecorationColor": "black",
+            "textDecorationLine": "underline",
+            "textDecorationStyle": "solid",
+          },
+        ]
+      }
+    >
+      Some test text route
+    </Text>
+  </View>
+</View>
+`;
