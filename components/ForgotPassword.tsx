@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import styled from 'styled-components/native';
 import FadeInLoader from './FadeInLoader';
 import FloatingLabelInput from './FloatingLabelInput';
@@ -47,26 +47,26 @@ const SubmitText = styled.Text`
   color: #fff;
 `;
 
-interface ForgotPasswordState {
-  email: string
+interface FPState {
+  email: string;
 }
 
-class ForgotPassword extends Component<{}, ForgotPasswordState> {
+class ForgotPassword extends Component<{}, FPState> {
   constructor(props: object) {
     super(props);
 
     this.state = {
       email: '',
-    }
+    };
   }
 
-  handleEmail = (email: string) => {
-    return this.setState({
+  private handleEmail = (email: string): void => {
+    this.setState({
       email,
     });
-  }
+  };
 
-  render() {
+  public render() {
     return (
       <Container source={require('../assets/auth-bg.jpg')}>
         <Header>
@@ -77,7 +77,7 @@ class ForgotPassword extends Component<{}, ForgotPasswordState> {
             <Group>
               <FloatingLabelInput
                 value={this.state.email}
-                placeholder='Enter your email address'
+                placeholder="Enter your email address"
                 changeHandle={this.handleEmail}
               />
             </Group>
@@ -87,11 +87,7 @@ class ForgotPassword extends Component<{}, ForgotPasswordState> {
           <Submit activeOpacity={0.9}>
             <SubmitText>Send</SubmitText>
           </Submit>
-          <Question 
-            path='/'
-            route='Sign in!'
-            question='Have an account?'
-          />
+          <Question path="/" route="Sign in!" question="Have an account?" />
         </Actions>
       </Container>
     );

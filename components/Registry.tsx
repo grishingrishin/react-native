@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { TouchableWithoutFeedback, Modal } from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
+import React, {Component} from 'react';
+import {TouchableWithoutFeedback} from 'react-native';
 import styled from 'styled-components/native';
+import ImagePicker from 'react-native-image-picker';
 import FadeInLoader from './FadeInLoader';
 import FloatingLabelInput from './FloatingLabelInput';
 import Question from './Question';
@@ -73,44 +73,16 @@ const SubmitText = styled.Text`
   color: #fff;
 `;
 
-const ModalInner = styled.TouchableHighlight`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0,0,0,.5);
-`;
-
-const ModalCard = styled.View`
-  width: 80%;
-  padding: 18px 14px 0 14px;
-  background-color: #fff;
-`;
-
-const ModalTitle = styled.Text`
-  margin-bottom: 12px
-  padding-bottom: 12px;
-  font-size: 18px;
-  line-height: 18px;
-  font-family: Roboto-Medium;
-  border-bottom-width: 1px;
-  border-bottom-color: rgba(0, 0, 0, 0.1);
-`;
-
-const ModalText = styled.Text`
-  margin-bottom: 18px;
-  font-size: 16px;
-`;
-
-interface RegisterState {
-  username: string,
-  email: string,
-  password: string,
-  passwordCheck: string,
-  image: string,
-  pickImageModal: boolean,
+interface RState {
+  username: string;
+  email: string;
+  password: string;
+  passwordCheck: string;
+  image: string;
+  pickImageIsOpen: boolean;
 }
 
-class Register extends Component<{}, RegisterState> {
+class Register extends Component<{}, RState> {
   constructor(props: object) {
     super(props);
 
@@ -120,153 +92,92 @@ class Register extends Component<{}, RegisterState> {
       password: '',
       passwordCheck: '',
       image: '',
-      pickImageModal: false,
+      pickImageIsOpen: false,
     };
   }
 
-  handleUser = (username: string) => {
-    return this.setState({
-      username, 
+  private handleUser = (username: string): void => {
+    this.setState({
+      username,
     });
-  }
+  };
 
-  handleEmail = (email: string) => {
-    return this.setState({
-      email, 
+  private handleEmail = (email: string): void => {
+    this.setState({
+      email,
     });
-  }
+  };
 
-  handlePassword = (password: string) => {
-    return this.setState({
-      password, 
+  private handlePassword = (password: string): void => {
+    this.setState({
+      password,
     });
-  }
+  };
 
-  handlePasswordCheck = (passwordCheck: string) => {
-    return this.setState({
-      passwordCheck, 
+  private handlePasswordCheck = (passwordCheck: string): void => {
+    this.setState({
+      passwordCheck,
     });
-  }
+  };
 
-  pickImage = () => {
-    if (!this.state.pickImageModal) {
-      return this.setState({
-        pickImageModal: true
-      });
-    }
-  }
-
-  loadImageFromDevice = async () => {
-    try {
-      let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.All,
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 1,
-      });
-
-      if (!result.cancelled) {
-        return this.setState({
-          image: result.uri,
-          pickImageModal: false,
+  private chooseImage = () => {
+    let options = {
+      title: 'Select Image',
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    ImagePicker.showImagePicker(options, (response) => {
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else {
+        console.log('response', JSON.stringify(response));
+        this.setState({
+          image: response.uri,
         });
       }
-
-      return false;
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  loadImageFromCamera = async () => {
-    try {
-      let result = await ImagePicker.launchCameraAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.All,
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 1,
-      });
-
-      if (!result.cancelled) {
-        return this.setState({
-          image: result.uri,
-          pickImageModal: false,
-        });
-      }
-
-      return false;
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  removeImage = () => {
-    return this.setState({
-      image: '',
-      pickImageModal: false,
     });
-  }
+  };
 
-  closedPickImageModal = () => {
-    if (this.state.pickImageModal) {
-      return this.setState({
-        pickImageModal: false,
-      });
-    }
-  }
-
-  render() {
-    const { image } = this.state;
-
+  public render() {
     return (
       <Container source={require('../assets/auth-bg.jpg')}>
-        <Modal transparent={true} visible={this.state.pickImageModal}>
-          <ModalInner onPress={this.closedPickImageModal}>
-            <ModalCard>
-              <ModalTitle>Сменить фото профиля</ModalTitle>
-              <TouchableWithoutFeedback onPress={this.loadImageFromDevice}>
-                <ModalText>Загрузить с устройства</ModalText>
-              </TouchableWithoutFeedback>
-              <TouchableWithoutFeedback onPress={this.loadImageFromCamera}>
-                <ModalText>Сделать снимок</ModalText>
-              </TouchableWithoutFeedback>
-              <TouchableWithoutFeedback onPress={this.removeImage}>
-                <ModalText>Удалить фото</ModalText>
-              </TouchableWithoutFeedback>
-            </ModalCard>
-          </ModalInner>
-        </Modal>
         <Header>
-          <Title>
-            Create your account
-          </Title>
+          <Title>Create your account</Title>
         </Header>
         <FadeInLoader>
           <Box>
             <Figure>
-              <TouchableWithoutFeedback onPress={this.pickImage}>
-                { image ? <Ava source={{ uri: image }} /> : <Upload source={require('../assets/upload.png')} /> }
+              <TouchableWithoutFeedback onPress={this.chooseImage}>
+                {this.state.image ? (
+                  <Ava source={{uri: this.state.image}} />
+                ) : (
+                  <Upload source={require('../assets/upload.png')} />
+                )}
               </TouchableWithoutFeedback>
               <Figcaption>Upload your photo</Figcaption>
             </Figure>
             <Group>
               <FloatingLabelInput
                 value={this.state.username}
-                placeholder='Username'
+                placeholder="Username"
                 changeHandle={this.handleUser}
               />
             </Group>
             <Group>
               <FloatingLabelInput
                 value={this.state.email}
-                placeholder='Email address'
+                placeholder="Email address"
                 changeHandle={this.handleEmail}
               />
             </Group>
             <Group>
               <FloatingLabelInput
                 value={this.state.password}
-                placeholder='Password'
+                placeholder="Password"
                 secureTextEntry={true}
                 changeHandle={this.handlePassword}
               />
@@ -274,7 +185,7 @@ class Register extends Component<{}, RegisterState> {
             <Group>
               <FloatingLabelInput
                 value={this.state.passwordCheck}
-                placeholder='Password check'
+                placeholder="Password check"
                 secureTextEntry={true}
                 changeHandle={this.handlePasswordCheck}
               />
@@ -285,11 +196,7 @@ class Register extends Component<{}, RegisterState> {
           <Submit activeOpacity={0.9}>
             <SubmitText>Sign up</SubmitText>
           </Submit>
-          <Question 
-            path='/'
-            route='Sign in!'
-            question='Have an account?'
-          />
+          <Question path="/" route="Sign in!" question="Have an account?" />
         </Actions>
       </Container>
     );

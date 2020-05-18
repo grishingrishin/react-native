@@ -1,9 +1,9 @@
 import React from 'react';
-import { create } from 'react-test-renderer';
+import {create} from 'react-test-renderer';
 import FadeInLoader from '../components/FadeInLoader';
-import { Text } from 'react-native';
+import {Text} from 'react-native';
 
-// Disable warning: `useNativeDriver` is not supported because the native animated module is missing. Falling back to JS-based animation. 
+// Disable warning: `useNativeDriver` is not supported because the native animated module is missing. Falling back to JS-based animation.
 // To resolve this, add `RCTAnimation` module to this app, or remove `useNativeDriver.
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
 // Fix referenceError: You are trying to `import` a file after the Jest environment has been torn down.
@@ -15,7 +15,7 @@ describe('<FadeInLoader />', () => {
       const tree = create(
         <FadeInLoader>
           <Text>Some test node</Text>
-        </FadeInLoader>
+        </FadeInLoader>,
       ).toJSON();
       expect(tree).toMatchSnapshot();
     });

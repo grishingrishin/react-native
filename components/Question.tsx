@@ -1,6 +1,6 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
-import { Link } from 'react-router-native';
+import {TouchableOpacity} from 'react-native';
+import {Link} from 'react-router-native';
 import styled from 'styled-components/native';
 
 const Container = styled.View`
@@ -23,13 +23,13 @@ const Route = styled.Text`
   color: #fff;
 `;
 
-export interface QuestionProps {
-  question: string,
-  route: string,
-  path: string,
+interface QProps {
+  question: string;
+  route: string;
+  path: string;
 }
 
-export default ({ question, route, path }: QuestionProps) => (
+export default ({question, route, path}: QProps) => (
   <Container>
     <Question>{question} </Question>
     <Link to={path} component={TouchableOpacity}>

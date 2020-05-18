@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import styled from 'styled-components/native';
 
 const ErrorContainer = styled.View`
@@ -10,39 +10,38 @@ const ErrorText = styled.Text`
 `;
 
 interface ERProps {
-  childrend: React.ReactNode,
+  children: React.ReactNode;
 }
 
-type ERState = {
-  hasError: boolean,
-  redirect: boolean,
+interface ERState {
+  hasError: boolean;
 }
 
 class ErrorBoundary extends Component<ERProps, ERState> {
   constructor(props: ERProps) {
     super(props);
 
-    this.state = { hasError: false, redirect: false, }
+    this.state = {hasError: false};
   }
 
   public static getDerivedStateFromError() {
-    return { hasError: true };
+    return {hasError: true};
   }
 
   public componentDidCatch(error: Error, info: React.ErrorInfo) {
-    console.error("ErrorBoundary caught an error", error, info);
+    console.error('ErrorBoundary caught an error', error, info);
   }
 
-  render() {
+  public render() {
     if (this.state.hasError) {
       return (
         <ErrorContainer>
           <ErrorText>Oops, Error!</ErrorText>
         </ErrorContainer>
-      )
+      );
     }
 
-    return this.props.children; 
+    return this.props.children;
   }
 }
 

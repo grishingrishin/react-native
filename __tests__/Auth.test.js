@@ -1,9 +1,9 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import { create } from 'react-test-renderer';
+import {shallow} from 'enzyme';
+import {create} from 'react-test-renderer';
 import Auth from '../components/Auth';
 
-// Disable warning: `useNativeDriver` is not supported because the native animated module is missing. Falling back to JS-based animation. 
+// Disable warning: `useNativeDriver` is not supported because the native animated module is missing. Falling back to JS-based animation.
 // To resolve this, add `RCTAnimation` module to this app, or remove `useNativeDriver.
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
 // Fix referenceError: You are trying to `import` a file after the Jest environment has been torn down.
@@ -20,7 +20,7 @@ describe('<Auth />', () => {
   describe('Enzyme tests', () => {
     it('allows us to set some state', () => {
       const wrapper = shallow(<Auth />);
-    
+
       wrapper.setState({
         login: 'test@test',
         password: 'testtesttest',
@@ -35,10 +35,18 @@ describe('<Auth />', () => {
 
       expect(wrapper.find('FloatingLabelInput')).toHaveLength(2);
 
-      wrapper.find('FloatingLabelInput').first().props().changeHandle('test@test');
+      wrapper
+        .find('FloatingLabelInput')
+        .first()
+        .props()
+        .changeHandle('test@test');
       expect(wrapper.state().login).toEqual('test@test');
 
-      wrapper.find('FloatingLabelInput').last().props().changeHandle('testtesttest');
+      wrapper
+        .find('FloatingLabelInput')
+        .last()
+        .props()
+        .changeHandle('testtesttest');
       expect(wrapper.state().password).toEqual('testtesttest');
 
       expect(wrapper).toMatchSnapshot();

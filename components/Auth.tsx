@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { TouchableOpacity } from 'react-native';
-import { Link } from 'react-router-native';
+import React, {Component} from 'react';
+import {TouchableOpacity} from 'react-native';
+import {Link} from 'react-router-native';
 import styled from 'styled-components/native';
 import FadeInLoader from './FadeInLoader';
 import FloatingLabelInput from './FloatingLabelInput';
@@ -60,34 +60,34 @@ const SubmitText = styled.Text`
   color: #fff;
 `;
 
-interface AuthState {
-  login: string,
-  password: string,
+interface AState {
+  login: string;
+  password: string;
 }
 
-class Auth extends Component<{}, AuthState> {
+class Auth extends Component<{}, AState> {
   constructor(props: object) {
     super(props);
 
     this.state = {
       login: '',
-      password: ''
-    }
+      password: '',
+    };
   }
 
-  handleLogin = (login: string) => {
-    return this.setState({
+  private handleLogin = (login: string): void => {
+    this.setState({
       login,
     });
-  }
+  };
 
-  handlePassword = (password: string) => {
-    return this.setState({
+  private handlePassword = (password: string): void => {
+    this.setState({
       password,
     });
-  }
+  };
 
-  render() {
+  public render() {
     return (
       <Container source={require('../assets/auth-bg.jpg')}>
         <Header>
@@ -98,19 +98,21 @@ class Auth extends Component<{}, AuthState> {
             <Group>
               <FloatingLabelInput
                 value={this.state.login}
-                placeholder='Login'
+                placeholder="Login"
                 changeHandle={this.handleLogin}
               />
             </Group>
             <Group>
               <FloatingLabelInput
                 value={this.state.password}
-                placeholder='Password'
+                placeholder="Password"
                 secureTextEntry={true}
                 changeHandle={this.handlePassword}
               />
               <Forgot>
-                <Link to="/forgot" component={TouchableOpacity}><ForgotText>Forgot Password?</ForgotText></Link>
+                <Link to="/forgot" component={TouchableOpacity}>
+                  <ForgotText>Forgot Password?</ForgotText>
+                </Link>
               </Forgot>
             </Group>
           </Box>
@@ -119,10 +121,10 @@ class Auth extends Component<{}, AuthState> {
           <Submit activeOpacity={0.9}>
             <SubmitText>Sing in</SubmitText>
           </Submit>
-          <Question 
-            path='/registry'
-            route='Register now!'
-            question='Still don’t have an account?'
+          <Question
+            path="/registry"
+            route="Register now!"
+            question="Still don’t have an account?"
           />
         </Actions>
       </Container>

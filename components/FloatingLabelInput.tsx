@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Animated } from 'react-native';
+import React, {Component} from 'react';
+import {Animated} from 'react-native';
 import styled from 'styled-components/native';
 
 const Container = styled.View`
@@ -20,24 +20,24 @@ const TextInput = styled.TextInput`
   border-bottom-color: rgba(211, 200, 230, 0.5);
 `;
 
-interface FloatingLabelInputProps {
-  value: string,
-  placeholder: string,
-  secureTextEntry: boolean,
-  changeHandle(text: string): any
+interface FLInputProps {
+  value: string;
+  placeholder: string;
+  secureTextEntry: boolean;
+  changeHandle(value: string): void;
 }
 
-interface FloatingLabelInputState {
-  animatedIsFocused: any
+interface FLInputState {
+  animatedIsFocused: any;
 }
 
-class FloatingLabelInput extends Component<FloatingLabelInputProps, FloatingLabelInputState> {
+class FloatingLabelInput extends Component<FLInputProps, FLInputState> {
   static defaultProps = {
     value: '',
     secureTextEntry: false,
-  } 
+  };
 
-  constructor(props: FloatingLabelInputProps) {
+  constructor(props: FLInputProps) {
     super(props);
 
     this.state = {
@@ -45,27 +45,29 @@ class FloatingLabelInput extends Component<FloatingLabelInputProps, FloatingLabe
     };
   }
 
-  handleChange = (value: string) => this.props.changeHandle(value);
+  private handleChange = (value: string): void => {
+    this.props.changeHandle(value);
+  };
 
-  handleFocus = () => {
-    return Animated.timing(this.state.animatedIsFocused, {
+  private handleFocus = (): void => {
+    Animated.timing(this.state.animatedIsFocused, {
       toValue: 1,
       duration: 200,
-      useNativeDriver: false
+      useNativeDriver: false,
     }).start();
-  }
+  };
 
-  handleBlur = () => {
-    return Animated.timing(this.state.animatedIsFocused, {
+  private handleBlur = (): void => {
+    Animated.timing(this.state.animatedIsFocused, {
       toValue: this.hasInputValue(),
       duration: 200,
-      useNativeDriver: false
+      useNativeDriver: false,
     }).start();
-  }
+  };
 
-  hasInputValue = (): number => this.props.value.length !== 0 ? 1 : 0;
+  private hasInputValue = (): number => (this.props.value.length !== 0 ? 1 : 0);
 
-  render() {
+  public render() {
     return (
       <Container>
         <Animated.Text
@@ -84,8 +86,7 @@ class FloatingLabelInput extends Component<FloatingLabelInputProps, FloatingLabe
               inputRange: [0, 1],
               outputRange: [1, 0.5],
             }),
-          }}
-        >
+          }}>
           <Placeholder>{this.props.placeholder}</Placeholder>
         </Animated.Text>
         <TextInput
@@ -96,7 +97,7 @@ class FloatingLabelInput extends Component<FloatingLabelInputProps, FloatingLabe
           onBlur={this.handleBlur}
         />
       </Container>
-    )
+    );
   }
 }
 

@@ -1,9 +1,9 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import { create } from 'react-test-renderer';
+import {shallow} from 'enzyme';
+import {create} from 'react-test-renderer';
 import ForgotPassword from '../components/ForgotPassword';
 
-// Disable warning: `useNativeDriver` is not supported because the native animated module is missing. Falling back to JS-based animation. 
+// Disable warning: `useNativeDriver` is not supported because the native animated module is missing. Falling back to JS-based animation.
 // To resolve this, add `RCTAnimation` module to this app, or remove `useNativeDriver.
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
 // Fix referenceError: You are trying to `import` a file after the Jest environment has been torn down.
@@ -20,8 +20,8 @@ describe('<ForgotPassword />', () => {
   describe('Enzyme tests', () => {
     it('allows us to set some state', () => {
       const wrapper = shallow(<ForgotPassword />);
-    
-      wrapper.setState({ email: 'test@test.com' });
+
+      wrapper.setState({email: 'test@test.com'});
       expect(wrapper.state().email).toEqual('test@test.com');
     });
 

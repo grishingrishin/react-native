@@ -1,24 +1,24 @@
-import React, { Component } from 'react';
-import { Animated } from 'react-native';
+import React, {Component} from 'react';
+import {Animated} from 'react-native';
 
-interface FadeInLoaderProps {
-  children: any
+interface FLProps {
+  children: React.ReactNode;
 }
 
-interface FadeInLoaderState {
-  opacity: any
+interface FLState {
+  opacity: any;
 }
 
-class FadeInLoader extends Component<FadeInLoaderProps, FadeInLoaderState> {
-  constructor(props: FadeInLoaderProps) {
+class FadeInLoader extends Component<FLProps, FLState> {
+  constructor(props: FLProps) {
     super(props);
 
     this.state = {
       opacity: new Animated.Value(0),
-    }
+    };
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     return Animated.timing(this.state.opacity, {
       toValue: 1,
       duration: 1000,
@@ -26,12 +26,12 @@ class FadeInLoader extends Component<FadeInLoaderProps, FadeInLoaderState> {
     }).start();
   }
 
-  render() {
+  public render() {
     return (
-      <Animated.View style={{ opacity: this.state.opacity }}>
+      <Animated.View style={{opacity: this.state.opacity}}>
         {this.props.children}
       </Animated.View>
-    )
+    );
   }
 }
 
