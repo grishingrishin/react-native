@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import styled from 'styled-components/native';
 import ErrorBoundary from './components/ErrorBoundary';
 import Routes from './components/Routes';
+import Account from './components/Account';
 
 const Container = styled.View`
   flex: 1;
@@ -24,7 +25,7 @@ class App extends Component<{}, AppState> {
     return (
       <ErrorBoundary>
         <Container>
-          <Routes />
+          <Account />
         </Container>
       </ErrorBoundary>
     );
