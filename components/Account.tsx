@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableHighlight } from 'react-native';
 import styled from 'styled-components/native';
-import SideMenu from './SideMenu';
+// import SideMenu from './SideMenu';
 
 const Container = styled.View`
   flex: 1;
@@ -66,7 +66,7 @@ const Account = () => {
           </TouchableHighlight>
         </Action>
       </Actions>
-      <SideMenu />
+      {/* <SideMenu /> */}
     </Container>
   )
 }

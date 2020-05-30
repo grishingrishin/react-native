@@ -1,0 +1,144 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Account /> Jest tests renders correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "pink",
+        "flexBasis": 0,
+        "flexGrow": 1,
+        "flexShrink": 1,
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "left": 0,
+          "paddingBottom": 28,
+          "paddingLeft": 24,
+          "paddingRight": 24,
+          "paddingTop": 28,
+          "position": "absolute",
+          "top": 0,
+          "width": "100%",
+          "zIndex": 1,
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "center",
+          },
+        ]
+      }
+    >
+      <View
+        accessible={true}
+        focusable={false}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+      >
+        <Image
+          source={
+            Object {
+              "testUri": "../../../assets/hamburger.png",
+            }
+          }
+          style={
+            Array [
+              Object {
+                "height": 24,
+                "width": 42,
+              },
+            ]
+          }
+        />
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "center",
+          },
+        ]
+      }
+    >
+      <View
+        accessible={true}
+        focusable={false}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+      >
+        <Image
+          source={
+            Object {
+              "testUri": "../../../assets/search.png",
+            }
+          }
+          style={
+            Array [
+              Object {
+                "height": 24,
+                "width": 24,
+              },
+            ]
+          }
+        />
+      </View>
+      <View
+        accessible={true}
+        focusable={false}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+      >
+        <Image
+          source={
+            Object {
+              "testUri": "../../../assets/user.png",
+            }
+          }
+          style={
+            Array [
+              Object {
+                "height": 48,
+                "marginLeft": 24,
+                "width": 48,
+              },
+            ]
+          }
+        />
+      </View>
+    </View>
+  </View>
+</View>
+`;

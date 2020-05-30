@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableHighlight, FlatList } from 'react-native';
+import { TouchableHighlight, FlatList, Alert } from 'react-native';
 import styled from 'styled-components/native';
 
 const Wrapper = styled.View`
@@ -20,8 +20,6 @@ const Menu = styled.View`
 
 const Header = styled.View`
   padding: 28px 24px;
-  border-bottom-width: .5px;
-  border-bottom-color: rgba(0,0,0,.3);
 `;
 
 const Actions = styled.View`
@@ -60,11 +58,15 @@ const UserName = styled.Text`
 `;
 
 const List = styled.View`
-  padding: 14px 0;
+  padding: 28px 0;
+  border-top-width: .5px;
+  border-top-color: rgba(0,0,0,.3);
+  border-bottom-width: .5px;
+  border-bottom-color: rgba(0,0,0,.3);
 `;
 
 const MenuItem = styled.View`
-  padding: 14px 24px;
+  padding: 18px 24px;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
@@ -79,6 +81,11 @@ const ItemIcon = styled.Image`
 const ItemText = styled.Text`
   font-size: 18px;
   font-family: Roboto-Light;
+  color: #333333;
+`;
+
+const Footer = styled.View`
+  padding: 18px 0;
 `;
 
 const MENU_ITEMS = [
@@ -106,7 +113,10 @@ const MENU_ITEMS = [
 
 const Item = ({ title }: any) => {
   return (
-    <TouchableHighlight>
+    <TouchableHighlight
+      underlayColor="#f0f5f7" 
+      onPress={() => console.log('Select item menu')}
+    >
       <MenuItem>
         <ItemIcon
           source={require('../assets/profile.png')}
@@ -155,6 +165,19 @@ const SideMenu = () => {
             keyExtractor={item => item.id}
           />
         </List>
+        <Footer>
+          <TouchableHighlight
+            underlayColor="#f0f5f7" 
+            onPress={() => console.log('Sign out')}
+          >
+            <MenuItem>
+              <ItemIcon
+                source={require('../assets/signout.png')}
+              />
+              <ItemText>Sign out</ItemText>
+            </MenuItem>
+          </TouchableHighlight>
+        </Footer>
       </Menu>
     </Wrapper>
   )
