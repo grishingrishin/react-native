@@ -1,6 +1,7 @@
 import React from 'react';
 import { TouchableHighlight } from 'react-native';
 import styled from 'styled-components/native';
+import SearchInput from './SearchInput';
 // import SideMenu from './SideMenu';
 
 const Container = styled.View`
@@ -29,17 +30,16 @@ const Action = styled.View`
 const Menu = styled.Image`
   width: 42px;
   height: 24px;
+  margin-right: 24px;
 `;
 
-const Search = styled.Image`
-  width: 24px;
-  height: 24px;
+const Search = styled.View`
+  margin-right: 24px;
 `;
 
 const Messages = styled.Image`
   width: 48px;
   height: 48px;
-  margin-left: 24px;
 `;
 
 const Account = () => {
@@ -54,11 +54,9 @@ const Account = () => {
           </TouchableHighlight>
         </Action>
         <Action>
-          <TouchableHighlight>
-            <Search
-              source={require('../assets/search.png')}
-            />
-          </TouchableHighlight>
+          <Search>
+            <SearchInput />
+          </Search>
           <TouchableHighlight>
             <Messages
               source={require('../assets/user.png')}

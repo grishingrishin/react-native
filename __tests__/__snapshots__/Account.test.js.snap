@@ -65,6 +65,7 @@ exports[`<Account /> Jest tests renders correctly 1`] = `
             Array [
               Object {
                 "height": 24,
+                "marginRight": 24,
                 "width": 42,
               },
             ]
@@ -84,31 +85,58 @@ exports[`<Account /> Jest tests renders correctly 1`] = `
       }
     >
       <View
-        accessible={true}
-        focusable={false}
-        onClick={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-      >
-        <Image
-          source={
+        style={
+          Array [
             Object {
-              "testUri": "../../../assets/search.png",
+              "marginRight": 24,
+            },
+          ]
+        }
+      >
+        <View
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
             }
           }
-          style={
-            Array [
-              Object {
-                "height": 24,
-                "width": 24,
-              },
-            ]
-          }
-        />
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                },
+              ]
+            }
+          >
+            <Image
+              source={
+                Object {
+                  "testUri": "../../../assets/search.png",
+                }
+              }
+              style={
+                Array [
+                  Object {
+                    "height": 32,
+                    "marginLeft": 8,
+                    "width": 32,
+                  },
+                ]
+              }
+            />
+          </View>
+        </View>
       </View>
       <View
         accessible={true}
@@ -131,7 +159,6 @@ exports[`<Account /> Jest tests renders correctly 1`] = `
             Array [
               Object {
                 "height": 48,
-                "marginLeft": 24,
                 "width": 48,
               },
             ]
