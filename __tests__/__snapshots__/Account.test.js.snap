@@ -37,9 +37,7 @@ exports[`<Account /> Jest tests renders correctly 1`] = `
       style={
         Array [
           Object {
-            "alignItems": "center",
-            "flexDirection": "row",
-            "justifyContent": "center",
+            "marginRight": 24,
           },
         ]
       }
@@ -54,6 +52,11 @@ exports[`<Account /> Jest tests renders correctly 1`] = `
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
       >
         <Image
           source={
@@ -65,7 +68,6 @@ exports[`<Account /> Jest tests renders correctly 1`] = `
             Array [
               Object {
                 "height": 24,
-                "marginRight": 24,
                 "width": 42,
               },
             ]
@@ -88,7 +90,7 @@ exports[`<Account /> Jest tests renders correctly 1`] = `
         style={
           Array [
             Object {
-              "marginRight": 24,
+              "marginLeft": 24,
             },
           ]
         }
@@ -139,15 +141,13 @@ exports[`<Account /> Jest tests renders correctly 1`] = `
         </View>
       </View>
       <View
-        accessible={true}
-        focusable={false}
-        onClick={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        style={
+          Array [
+            Object {
+              "marginLeft": 24,
+            },
+          ]
+        }
       >
         <Image
           source={

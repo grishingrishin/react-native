@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components/native';
 import ErrorBoundary from './components/ErrorBoundary';
-import Routes from './components/Routes';
+// import Routes from './components/Routes';
 import Account from './components/Account';
 
 const Container = styled.View`

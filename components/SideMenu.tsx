@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableHighlight, FlatList, Alert } from 'react-native';
+import {TouchableHighlight, FlatList} from 'react-native';
 import styled from 'styled-components/native';
 
 const Wrapper = styled.View`
@@ -9,10 +9,10 @@ const Wrapper = styled.View`
   z-index: 999999;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,.3);
+  background-color: rgba(0, 0, 0, 0.3);
 `;
 
-const Menu = styled.View`
+const Box = styled.View`
   width: 80%;
   height: 100%;
   background-color: #fff;
@@ -59,10 +59,10 @@ const UserName = styled.Text`
 
 const List = styled.View`
   padding: 28px 0;
-  border-top-width: .5px;
-  border-top-color: rgba(0,0,0,.3);
-  border-bottom-width: .5px;
-  border-bottom-color: rgba(0,0,0,.3);
+  border-top-width: 0.5px;
+  border-top-color: rgba(0, 0, 0, 0.3);
+  border-bottom-width: 0.5px;
+  border-bottom-color: rgba(0, 0, 0, 0.3);
 `;
 
 const MenuItem = styled.View`
@@ -111,50 +111,36 @@ const MENU_ITEMS = [
   },
 ];
 
-const Item = ({ title }: any) => {
+const Item = ({title}: any) => {
   return (
     <TouchableHighlight
-      underlayColor="#f0f5f7" 
-      onPress={() => console.log('Select item menu')}
-    >
+      underlayColor="#f0f5f7"
+      onPress={() => console.log('Select item menu')}>
       <MenuItem>
-        <ItemIcon
-          source={require('../assets/profile.png')}
-        />
+        <ItemIcon source={require('../assets/profile.png')} />
         <ItemText>{title}</ItemText>
       </MenuItem>
     </TouchableHighlight>
   );
-}
+};
 
 const SideMenu = () => {
-  const renderItem = ({ item }: any) => (
-    <Item
-      id={item.id}
-      title={item.title}
-    />
-  );
+  const renderItem = ({item}: any) => <Item id={item.id} title={item.title} />;
 
   return (
     <Wrapper>
-      <Menu>
+      <Box>
         <Header>
           <Actions>
             <TouchableHighlight>
-              <Closed
-                source={require('../assets/arrow.png')}
-              />
+              <Closed source={require('../assets/arrow.png')} />
             </TouchableHighlight>
             <TouchableHighlight>
-              <Settings
-                source={require('../assets/settings.png')}
-              />
+              <Settings source={require('../assets/settings.png')} />
             </TouchableHighlight>
           </Actions>
           <User>
-            <Avatar
-              source={require('../assets/sidemenu_avatar.png')}
-            />
+            <Avatar source={require('../assets/sidemenu_avatar.png')} />
             <UserName>Sarah Townshend</UserName>
           </User>
         </Header>
@@ -162,25 +148,22 @@ const SideMenu = () => {
           <FlatList
             data={MENU_ITEMS}
             renderItem={renderItem}
-            keyExtractor={item => item.id}
+            keyExtractor={(item) => item.id}
           />
         </List>
         <Footer>
           <TouchableHighlight
-            underlayColor="#f0f5f7" 
-            onPress={() => console.log('Sign out')}
-          >
+            underlayColor="#f0f5f7"
+            onPress={() => console.log('Sign out')}>
             <MenuItem>
-              <ItemIcon
-                source={require('../assets/signout.png')}
-              />
+              <ItemIcon source={require('../assets/signout.png')} />
               <ItemText>Sign out</ItemText>
             </MenuItem>
           </TouchableHighlight>
         </Footer>
-      </Menu>
+      </Box>
     </Wrapper>
-  )
-}
+  );
+};
 
 export default SideMenu;

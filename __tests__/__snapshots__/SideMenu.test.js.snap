@@ -5,7 +5,7 @@ exports[`<SideMenu /> Jest tests renders correctly 1`] = `
   style={
     Array [
       Object {
-        "backgroundColor": "rgba(0,0,0,.3)",
+        "backgroundColor": "rgba(0,0,0,0.3)",
         "height": "100%",
         "left": 0,
         "position": "absolute",
@@ -157,9 +157,9 @@ exports[`<SideMenu /> Jest tests renders correctly 1`] = `
       style={
         Array [
           Object {
-            "borderBottomColor": "rgba(0,0,0,.3)",
+            "borderBottomColor": "rgba(0,0,0,0.3)",
             "borderBottomWidth": 0.5,
-            "borderTopColor": "rgba(0,0,0,.3)",
+            "borderTopColor": "rgba(0,0,0,0.3)",
             "borderTopWidth": 0.5,
             "paddingBottom": 28,
             "paddingLeft": 0,

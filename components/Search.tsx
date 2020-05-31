@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import { TouchableOpacity } from 'react-native';
+import React, {Component} from 'react';
+import {TouchableOpacity} from 'react-native';
 import styled from 'styled-components/native';
 
-const Search = styled.View`
+const Container = styled.View`
   flex-direction: row;
   align-items: center;
 `;
 
-const SearchIcon = styled.Image`
+const SearchImage = styled.Image`
   width: 32px;
   height: 32px;
   margin-left: 8px;
 `;
 
-const CloseIcon = styled.Image`
+const CloseImage = styled.Image`
   width: 14px;
   height: 14px;
   margin-left: 8px;
@@ -34,11 +34,11 @@ interface SState {
   searchValue: string;
 }
 
-class SearchInput extends Component<{}, SState> {
+class Search extends Component<{}, SState> {
   constructor(props: object) {
     super(props);
 
-    this.state = { isOpen: false, searchValue: '' }
+    this.state = {isOpen: false, searchValue: ''};
   }
 
   private handleOpen = () => {
@@ -47,13 +47,13 @@ class SearchInput extends Component<{}, SState> {
       isOpen,
       searchValue: '',
     });
-  }
+  };
 
-  public handleChange = (text: string): void => {
+  private handleChange = (text: string): void => {
     return this.setState({
-      searchValue: text
+      searchValue: text,
     });
-  }
+  };
 
   public render() {
     return (
@@ -61,26 +61,30 @@ class SearchInput extends Component<{}, SState> {
         {(() => {
           if (this.state.isOpen) {
             return (
-              <Search>
+              <Container>
                 <TextInput
                   value={this.state.searchValue}
                   onChangeText={this.handleChange}
-                  selectionColor='#ffdf08'
+                  selectionColor="#ffdf08"
                 />
-                <CloseIcon source={require('../assets/close.png')} />
-              </Search>
-            )
+                <CloseImage
+                  source={require('../assets/close.png')}
+                />
+              </Container>
+            );
           } else {
             return (
-              <Search>
-                <SearchIcon source={require('../assets/search.png')} />
-              </Search>
-            )
+              <Container>
+                <SearchImage
+                  source={require('../assets/search.png')}
+                />
+              </Container>
+            );
           }
         })()}
       </TouchableOpacity>
-    )
+    );
   }
 }
 
-export default SearchInput;
+export default Search;
